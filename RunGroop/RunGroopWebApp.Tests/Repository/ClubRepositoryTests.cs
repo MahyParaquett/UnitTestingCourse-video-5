@@ -4,11 +4,6 @@ using RunGroopWebApp.Data;
 using RunGroopWebApp.Data.Enum;
 using RunGroopWebApp.Models;
 using RunGroopWebApp.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace RunGroopWebApp.Tests.Repository
@@ -20,8 +15,10 @@ namespace RunGroopWebApp.Tests.Repository
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
+
             var databaseContext = new ApplicationDbContext(options);
             databaseContext.Database.EnsureCreated();
+
             if(await databaseContext.Clubs.CountAsync() < 0)
             {
                 for (int i = 0; i < 10; i++)
